@@ -1,0 +1,40 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
+
+namespace Xurrent.GraphQL.Tests
+{
+    [TestClass]
+    public class FirstLineSupportAgreementTest
+    {
+        private readonly XurrentClient client = Client.Get();
+
+        [TestMethod]
+        public void Get()
+        {
+            DataList<FirstLineSupportAgreement> firstLineSupportAgreements = client.Get(Query.FirstLineSupportAgreement
+                .View(FirstLineSupportAgreementView.All)
+                .SelectAll()
+                .SelectChargesAttachments(new AttachmentQuery()
+                    .SelectAll())
+                .SelectInvoices(new InvoiceQuery()
+                    .SelectAll())
+                .SelectTargetDetailsAttachments(new AttachmentQuery()
+                    .SelectAll())
+                .SelectCustomerRepresentative(new PersonQuery()
+                    .SelectAll())
+                .SelectMajorIncidentManagers(new PersonQuery()
+                    .SelectAll())
+                ).Result;
+
+            Assert.IsNotNull(firstLineSupportAgreements);
+            Console.WriteLine($"Count: {firstLineSupportAgreements.Count}");
+
+            if (firstLineSupportAgreements.Any())
+            {
+                firstLineSupportAgreements = client.Get(new FirstLineSupportAgreementQuery(firstLineSupportAgreements.First().ID)).Result;
+                Assert.IsNotNull(firstLineSupportAgreements);
+            }
+        }
+    }
+}

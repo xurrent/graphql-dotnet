@@ -1,0 +1,48 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
+
+namespace Xurrent.GraphQL.Tests
+{
+    [TestClass]
+    public class TaskTest
+    {
+        private readonly XurrentClient client = Client.Get();
+
+        [TestMethod]
+        public void Get()
+        {
+            DataList<Task> tasks = client.Get(Query.Task
+                .View(TaskView.All)
+                .SelectAll()
+                .SelectApprovals(new TaskApprovalQuery()
+                    .SelectAll())
+                .SelectAutomationRules(new AutomationRuleQuery()
+                    .SelectAll())
+                .SelectConfigurationItems(new ConfigurationItemQuery()
+                    .SelectAll())
+                .SelectCustomFieldsAttachments(new AttachmentQuery()
+                    .SelectAll())
+                .SelectInstructionsAttachments(new AttachmentQuery()
+                    .SelectAll())
+                .SelectNotes(new NoteQuery()
+                    .SelectAll())
+                .SelectServiceInstances(new ServiceInstanceQuery()
+                    .SelectAll())
+                .SelectSprintBacklogItems(new SprintBacklogItemQuery()
+                    .SelectAll())
+                .SelectTimeEntries(new TimeEntryQuery()
+                    .SelectAll())
+                ).Result;
+
+            Assert.IsNotNull(tasks);
+            Console.WriteLine($"Count: {tasks.Count}");
+
+            if (tasks.Any())
+            {
+                tasks = client.Get(new TaskQuery(tasks.First().ID)).Result;
+                Assert.IsNotNull(tasks);
+            }
+        }
+    }
+}

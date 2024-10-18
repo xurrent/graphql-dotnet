@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>netstandard2.0;net472;net6.0;net8.0</TargetFrameworks>
+		<LangVersion>9</LangVersion>
+		<RootNamespace>Xurrent.GraphQL</RootNamespace>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<Title>Xurrent.GraphQL</Title>
+		<Authors>Xurrent Inc.</Authors>
+		<Description>A .NET client for accessing the Xurrent GraphQL API</Description>
+		<Copyright>(c) 2024 Xurrent Inc.</Copyright>
+		<PackageProjectUrl>https://developer.xurrent.com</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/xurrent/graphql-dotnet</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>4me;Xurrent;GraphQL</PackageTags>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>Icon.png</PackageIcon>
+		<Version>1.0.0</Version>
+		<SignAssembly>False</SignAssembly>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackRelease>true</PackRelease>
+		<Company>Xurrent Inc.</Company>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+		<NoWarn>1701;1702;SYSLIB1045</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+		<NoWarn>1701;1702;SYSLIB1045</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net472' Or '$(TargetFramework)'=='netstandard2.0'">
+		<PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include=".Package\Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>Icon.png</PackagePath>
+		</None>
+		<None Include=".Package\README.md">
+			<Pack>True</Pack>
+			<PackagePath>README.md</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// Creates a new broadcast.
+    /// </summary>
+    internal sealed class BroadcastCreateMutation : Mutation<BroadcastCreatePayload, BroadcastCreateInput>
+    {
+        /// <summary>
+        /// Initialize an new BroadcastCreate mutation instance.
+        /// </summary>
+        /// <param name="data">The input data.</param>
+        /// <param name="query">The broadcast response query.</param>
+        internal BroadcastCreateMutation(BroadcastCreateInput data, BroadcastQuery query)
+            : base("broadcastCreate", "BroadcastCreateInput!", data, GetQuery(query))
+        {
+        }
+
+        /// <summary>
+        /// Generates the response query collection.
+        /// </summary>
+        /// <param name="query">The broadcast response query.</param>
+        /// <returns>A query collection.</returns>
+        private static HashSet<IQuery> GetQuery(BroadcastQuery query)
+        {
+            query.FieldName = "broadcast";
+            query.IsConnection = false;
+            return new HashSet<IQuery>() { query };
+        }
+    }
+}

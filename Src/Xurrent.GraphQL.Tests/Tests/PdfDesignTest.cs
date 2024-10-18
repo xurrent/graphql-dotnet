@@ -1,0 +1,38 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
+
+namespace Xurrent.GraphQL.Tests
+{
+    [TestClass]
+    public class PdfDesignTest
+    {
+        private readonly XurrentClient client = Client.Get();
+
+        [TestMethod]
+        public void Get()
+        {
+            DataList<PdfDesign> pdfDesigns = client.Get(Query.PdfDesign
+                .View(DefaultView.None)
+                .SelectAll()
+                .SelectTranslations(new TranslationQuery()
+                    .SelectAll()
+                    .ItemsPerRequest(10)
+                    .SelectOwner(new PdfDesignQuery()
+                        .ItemsPerRequest(1)
+                        .SelectTranslations(new TranslationQuery())))
+                    .SelectDescriptionAttachments(new AttachmentQuery()
+                    .SelectAll())
+                ).Result;
+
+            Assert.IsNotNull(pdfDesigns);
+            Console.WriteLine($"Count: {pdfDesigns.Count}");
+
+            if (pdfDesigns.Any())
+            {
+                pdfDesigns = client.Get(new PdfDesignQuery(pdfDesigns.First().ID)).Result;
+                Assert.IsNotNull(pdfDesigns);
+            }
+        }
+    }
+}

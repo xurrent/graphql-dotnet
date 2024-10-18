@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// Updates an existing request.
+    /// </summary>
+    internal sealed class RequestUpdateMutation : Mutation<RequestUpdatePayload, RequestUpdateInput>
+    {
+        /// <summary>
+        /// Initialize an new RequestUpdate mutation instance.
+        /// </summary>
+        /// <param name="data">The input data.</param>
+        /// <param name="query">The request response query.</param>
+        internal RequestUpdateMutation(RequestUpdateInput data, RequestQuery query)
+            : base("requestUpdate", "RequestUpdateInput!", data, GetQuery(query))
+        {
+        }
+
+        /// <summary>
+        /// Generates the response query collection.
+        /// </summary>
+        /// <param name="query">The request response query.</param>
+        /// <returns>A query collection.</returns>
+        private static HashSet<IQuery> GetQuery(RequestQuery query)
+        {
+            query.FieldName = "request";
+            query.IsConnection = false;
+            return new HashSet<IQuery>() { query };
+        }
+    }
+}

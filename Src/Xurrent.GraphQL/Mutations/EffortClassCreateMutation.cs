@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// Creates a new effort class.
+    /// </summary>
+    internal sealed class EffortClassCreateMutation : Mutation<EffortClassCreatePayload, EffortClassCreateInput>
+    {
+        /// <summary>
+        /// Initialize an new EffortClassCreate mutation instance.
+        /// </summary>
+        /// <param name="data">The input data.</param>
+        /// <param name="query">The effort class response query.</param>
+        internal EffortClassCreateMutation(EffortClassCreateInput data, EffortClassQuery query)
+            : base("effortClassCreate", "EffortClassCreateInput!", data, GetQuery(query))
+        {
+        }
+
+        /// <summary>
+        /// Generates the response query collection.
+        /// </summary>
+        /// <param name="query">The effort class response query.</param>
+        /// <returns>A query collection.</returns>
+        private static HashSet<IQuery> GetQuery(EffortClassQuery query)
+        {
+            query.FieldName = "effortClass";
+            query.IsConnection = false;
+            return new HashSet<IQuery>() { query };
+        }
+    }
+}

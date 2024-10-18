@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// Creates a new service.
+    /// </summary>
+    internal sealed class ServiceCreateMutation : Mutation<ServiceCreatePayload, ServiceCreateInput>
+    {
+        /// <summary>
+        /// Initialize an new ServiceCreate mutation instance.
+        /// </summary>
+        /// <param name="data">The input data.</param>
+        /// <param name="query">The service response query.</param>
+        internal ServiceCreateMutation(ServiceCreateInput data, ServiceQuery query)
+            : base("serviceCreate", "ServiceCreateInput!", data, GetQuery(query))
+        {
+        }
+
+        /// <summary>
+        /// Generates the response query collection.
+        /// </summary>
+        /// <param name="query">The service response query.</param>
+        /// <returns>A query collection.</returns>
+        private static HashSet<IQuery> GetQuery(ServiceQuery query)
+        {
+            query.FieldName = "service";
+            query.IsConnection = false;
+            return new HashSet<IQuery>() { query };
+        }
+    }
+}

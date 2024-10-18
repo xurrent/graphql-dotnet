@@ -1,0 +1,115 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// The <see href="https://developer.xurrent.com/graphql/object/effortclass/">EffortClass</see> object.
+    /// </summary>
+    public class EffortClass : Node
+    {
+        /// <summary>
+        /// The account this record belongs to.
+        /// </summary>
+        [JsonProperty("account")]
+        public Account? Account { get; internal set; }
+
+        /// <summary>
+        /// The amount with which to multiply the cost of time entries with this effort class.
+        /// </summary>
+        [JsonProperty("costMultiplier")]
+        public decimal? CostMultiplier { get; internal set; }
+
+        /// <summary>
+        /// The date and time at which the record was created.
+        /// </summary>
+        [JsonProperty("createdAt"), XurrentField(IsDefaultQueryProperty = true)]
+        public DateTime? CreatedAt { get; internal set; }
+
+        /// <summary>
+        /// Whether the effort class may no longer be related to any more timesheet settings.
+        /// </summary>
+        [JsonProperty("disabled"), XurrentField(IsDefaultQueryProperty = true)]
+        public bool? Disabled { get; internal set; }
+
+        /// <summary>
+        /// The name of the effort class.
+        /// </summary>
+        [JsonProperty("name"), XurrentField(IsDefaultQueryProperty = true)]
+        public string? Name { get; internal set; }
+
+        /// <summary>
+        /// The position that the effort class takes when it is displayed in a sorted list.
+        /// </summary>
+        [JsonProperty("position")]
+        public long? Position { get; internal set; }
+
+        [JsonProperty("serviceOfferings")]
+        internal NodeCollection<ServiceOffering>? ServiceOfferingsCollection { get; set; }
+
+        /// <summary>
+        /// Service offerings of this effort class.
+        /// </summary>
+        public DataList<ServiceOffering>? ServiceOfferings
+        {
+            get => ServiceOfferingsCollection?.Data;
+        }
+
+        [JsonProperty("skillPools")]
+        internal NodeCollection<SkillPool>? SkillPoolsCollection { get; set; }
+
+        /// <summary>
+        /// Skill pools of this effort class.
+        /// </summary>
+        public DataList<SkillPool>? SkillPools
+        {
+            get => SkillPoolsCollection?.Data;
+        }
+
+        /// <summary>
+        /// An identifier for the client application submitting the resource or the name of an external system.
+        /// </summary>
+        [JsonProperty("source"), XurrentField(IsDefaultQueryProperty = true)]
+        public string? Source { get; internal set; }
+
+        /// <summary>
+        /// The unique identifier of the resource in an external system.
+        /// </summary>
+        [JsonProperty("sourceID"), XurrentField(IsDefaultQueryProperty = true)]
+        public string? SourceID { get; internal set; }
+
+        [JsonProperty("timesheetSettings")]
+        internal NodeCollection<TimesheetSetting>? TimesheetSettingsCollection { get; set; }
+
+        /// <summary>
+        /// Timesheet settings of this effort class.
+        /// </summary>
+        public DataList<TimesheetSetting>? TimesheetSettings
+        {
+            get => TimesheetSettingsCollection?.Data;
+        }
+
+        /// <summary>
+        /// The date and time of the last update of the record. If the record has no updates it contains the <c>createdAt</c> value.
+        /// </summary>
+        [JsonProperty("updatedAt"), XurrentField(IsDefaultQueryProperty = true)]
+        public DateTime? UpdatedAt { get; internal set; }
+
+        internal override HashSet<QueryPageInfo> GetQueryPageInfo(string fieldName, int depth)
+        {
+            HashSet<QueryPageInfo> retval = new();
+            retval.AddRange(ServiceOfferingsCollection?.GetQueryPageInfo("serviceOfferings", depth + 1));
+            retval.AddRange(SkillPoolsCollection?.GetQueryPageInfo("skillPools", depth + 1));
+            retval.AddRange(TimesheetSettingsCollection?.GetQueryPageInfo("timesheetSettings", depth + 1));
+            return retval;
+        }
+
+        internal override void AddToCollection(object data)
+        {
+            ServiceOfferings?.AddRange((data as EffortClass)?.ServiceOfferings);
+            SkillPools?.AddRange((data as EffortClass)?.SkillPools);
+            TimesheetSettings?.AddRange((data as EffortClass)?.TimesheetSettings);
+        }
+    }
+}

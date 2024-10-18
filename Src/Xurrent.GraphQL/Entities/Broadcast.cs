@@ -1,0 +1,236 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// The <see href="https://developer.xurrent.com/graphql/object/broadcast/">Broadcast</see> object.
+    /// </summary>
+    public class Broadcast : Node
+    {
+        /// <summary>
+        /// The account this record belongs to.
+        /// </summary>
+        [JsonProperty("account")]
+        public Account? Account { get; internal set; }
+
+        /// <summary>
+        /// The body used in email broadcast.
+        /// </summary>
+        [JsonProperty("body")]
+        public string? Body { get; internal set; }
+
+        /// <summary>
+        /// The date and time at which the record was created.
+        /// </summary>
+        [JsonProperty("createdAt")]
+        public DateTime? CreatedAt { get; internal set; }
+
+        [JsonProperty("customers")]
+        internal NodeCollection<Organization>? CustomersCollection { get; set; }
+
+        /// <summary>
+        /// Used to select one or more customer organizations when the broadcast is to be displayed for the specialists of the account in requests that were received from the selected organizations. This field is available only when the "Specialists in requests from the following customers" visibility option is selected.
+        /// </summary>
+        public DataList<Organization>? Customers
+        {
+            get => CustomersCollection?.Data;
+        }
+
+        /// <summary>
+        /// Whether the message should not be broadcasted.
+        /// </summary>
+        [JsonProperty("disabled")]
+        public bool? Disabled { get; internal set; }
+
+        /// <summary>
+        /// The email template used for the email broadcast. This email template needs to be of the type Send Email from Broadcast.
+        /// </summary>
+        [JsonProperty("emailTemplate")]
+        public EmailTemplate? EmailTemplate { get; internal set; }
+
+        /// <summary>
+        /// Used to select the end date and time of the broadcast. This field is left empty when the message is to be broadcasted until the Disabled box is checked. (If the broadcast should end at midnight at the end of a day, specify 12:00am or 24:00.)
+        /// </summary>
+        [JsonProperty("endAt"), XurrentField(IsDefaultQueryProperty = true)]
+        public DateTime? EndAt { get; internal set; }
+
+        /// <summary>
+        /// Used to select the appropriate icon for the message. The selected icon is displayed alongside the message when the broadcast is presented.
+        /// </summary>
+        [JsonProperty("messageType"), XurrentField(IsDefaultQueryProperty = true)]
+        public BroadcastMessageType? MessageType { get; internal set; }
+
+        [JsonProperty("organizations")]
+        internal NodeCollection<Organization>? OrganizationsCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the organizations, to which people belong, that need to see the broadcast.
+        /// </summary>
+        public DataList<Organization>? Organizations
+        {
+            get => OrganizationsCollection?.Data;
+        }
+
+        /// <summary>
+        /// Any additional information about the broadcast that might prove useful.
+        /// </summary>
+        [JsonProperty("remarks")]
+        public string? Remarks { get; internal set; }
+
+        [JsonProperty("remarksAttachments")]
+        internal NodeCollection<Attachment>? RemarksAttachmentsCollection { get; set; }
+
+        /// <summary>
+        /// Files and inline images linked to the Remarks field.
+        /// </summary>
+        public DataList<Attachment>? RemarksAttachments
+        {
+            get => RemarksAttachmentsCollection?.Data;
+        }
+
+        /// <summary>
+        /// Grouped request to which customers can add request to indicate they are also affected.
+        /// </summary>
+        [JsonProperty("request")]
+        public Request? Request { get; internal set; }
+
+        [JsonProperty("serviceInstances")]
+        internal NodeCollection<ServiceInstance>? ServiceInstancesCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the service instances for which the people, who are covered for them by an active SLA, need to see the broadcast. This table field is available only when the "People covered for the following service instance(s)" visibility option is selected.
+        /// </summary>
+        public DataList<ServiceInstance>? ServiceInstances
+        {
+            get => ServiceInstancesCollection?.Data;
+        }
+
+        [JsonProperty("sites")]
+        internal NodeCollection<Site>? SitesCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the sites for which people need to see the broadcast.
+        /// </summary>
+        public DataList<Site>? Sites
+        {
+            get => SitesCollection?.Data;
+        }
+
+        [JsonProperty("skillPools")]
+        internal NodeCollection<SkillPool>? SkillPoolsCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the skill pools, to which people belong, that need to see the broadcast.
+        /// </summary>
+        public DataList<SkillPool>? SkillPools
+        {
+            get => SkillPoolsCollection?.Data;
+        }
+
+        [JsonProperty("slas")]
+        internal NodeCollection<ServiceLevelAgreement>? SlasCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the service level agreements for which the customer representatives will receive the email broadcast. This is only available for broadcasts when the message type "email" is selected.
+        /// </summary>
+        public DataList<ServiceLevelAgreement>? Slas
+        {
+            get => SlasCollection?.Data;
+        }
+
+        /// <summary>
+        /// An identifier for the client application submitting the resource or the name of an external system.
+        /// </summary>
+        [JsonProperty("source")]
+        public string? Source { get; internal set; }
+
+        /// <summary>
+        /// The unique identifier of the resource in an external system.
+        /// </summary>
+        [JsonProperty("sourceID")]
+        public string? SourceID { get; internal set; }
+
+        /// <summary>
+        /// Used to specify the start date and time of the broadcast. (If the broadcast should start at midnight at the start of a day, specify 00:00.)
+        /// </summary>
+        [JsonProperty("startAt"), XurrentField(IsDefaultQueryProperty = true)]
+        public DateTime? StartAt { get; internal set; }
+
+        /// <summary>
+        /// The subject used in email broadcasts.
+        /// </summary>
+        [JsonProperty("subject")]
+        public string? Subject { get; internal set; }
+
+        [JsonProperty("teams")]
+        internal NodeCollection<Team>? TeamsCollection { get; set; }
+
+        /// <summary>
+        /// Used to select the teams which members need to see the broadcast. This table field is available only when the "Members of the following team(s)" visibility option is selected.
+        /// </summary>
+        public DataList<Team>? Teams
+        {
+            get => TeamsCollection?.Data;
+        }
+
+        /// <summary>
+        /// <br>Used to select the time zone that applies to the dates and times specified in the Start and End fields.</br>
+        /// <br>The complete list is available on the <see href="https://developer.xurrent.com/graphql/scalar/timezone/">Xurrent developer site</see>.</br>
+        /// </summary>
+        [JsonProperty("timeZone")]
+        public string? TimeZone { get; internal set; }
+
+        [JsonProperty("translations")]
+        internal NodeCollection<BroadcastTranslation>? TranslationsCollection { get; set; }
+
+        /// <summary>
+        /// Broadcast's message in different languages.
+        /// </summary>
+        public DataList<BroadcastTranslation>? Translations
+        {
+            get => TranslationsCollection?.Data;
+        }
+
+        /// <summary>
+        /// The date and time of the last update of the record. If the record has no updates it contains the <c>createdAt</c> value.
+        /// </summary>
+        [JsonProperty("updatedAt")]
+        public DateTime? UpdatedAt { get; internal set; }
+
+        /// <summary>
+        /// Used to define the target audience of the broadcast.
+        /// </summary>
+        [JsonProperty("visibility")]
+        public BroadcastVisibility? Visibility { get; internal set; }
+
+        internal override HashSet<QueryPageInfo> GetQueryPageInfo(string fieldName, int depth)
+        {
+            HashSet<QueryPageInfo> retval = new();
+            retval.AddRange(CustomersCollection?.GetQueryPageInfo("customers", depth + 1));
+            retval.AddRange(OrganizationsCollection?.GetQueryPageInfo("organizations", depth + 1));
+            retval.AddRange(RemarksAttachmentsCollection?.GetQueryPageInfo("remarksAttachments", depth + 1));
+            retval.AddRange(ServiceInstancesCollection?.GetQueryPageInfo("serviceInstances", depth + 1));
+            retval.AddRange(SitesCollection?.GetQueryPageInfo("sites", depth + 1));
+            retval.AddRange(SkillPoolsCollection?.GetQueryPageInfo("skillPools", depth + 1));
+            retval.AddRange(SlasCollection?.GetQueryPageInfo("slas", depth + 1));
+            retval.AddRange(TeamsCollection?.GetQueryPageInfo("teams", depth + 1));
+            retval.AddRange(TranslationsCollection?.GetQueryPageInfo("translations", depth + 1));
+            return retval;
+        }
+
+        internal override void AddToCollection(object data)
+        {
+            Customers?.AddRange((data as Broadcast)?.Customers);
+            Organizations?.AddRange((data as Broadcast)?.Organizations);
+            RemarksAttachments?.AddRange((data as Broadcast)?.RemarksAttachments);
+            ServiceInstances?.AddRange((data as Broadcast)?.ServiceInstances);
+            Sites?.AddRange((data as Broadcast)?.Sites);
+            SkillPools?.AddRange((data as Broadcast)?.SkillPools);
+            Slas?.AddRange((data as Broadcast)?.Slas);
+            Teams?.AddRange((data as Broadcast)?.Teams);
+            Translations?.AddRange((data as Broadcast)?.Translations);
+        }
+    }
+}

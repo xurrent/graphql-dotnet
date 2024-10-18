@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net472;net6.0;net8.0</TargetFrameworks>
+	<LangVersion>9</LangVersion>
+	<ImplicitUsings>disable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+
+	<IsPackable>false</IsPackable>
+	<IsTestProject>true</IsTestProject>
+	<UserSecretsId>c5848f7b-2c39-4f8c-9d83-7b24903e23a2</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'">
+	<IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="coverlet.collector" Version="6.0.2">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+	<PackageReference Include="MSTest.TestAdapter" Version="3.6.1" />
+	<PackageReference Include="MSTest.TestFramework" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\Xurrent.GraphQL\Xurrent.GraphQL.csproj" />
+  </ItemGroup>
+
+</Project>

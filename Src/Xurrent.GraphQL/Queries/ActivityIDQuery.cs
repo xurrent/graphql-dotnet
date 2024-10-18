@@ -1,0 +1,16 @@
+﻿namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// The <see cref="ActivityID">ActivityID</see> query.
+    /// </summary>
+    public class ActivityIDQuery : Query<ActivityIDQuery, ActivityIDField, DefaultView, DefaultFilter, DefaultOrderField>
+    {
+        /// <summary>
+        /// Initialize a new activity id query instance.
+        /// </summary>
+        public ActivityIDQuery()
+            : base("", typeof(ActivityID), false)
+        {
+        }
+    }
+}

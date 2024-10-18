@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+
+namespace Xurrent.GraphQL
+{
+    /// <summary>
+    /// Creates a new workflow.
+    /// </summary>
+    internal sealed class WorkflowCreateMutation : Mutation<WorkflowCreatePayload, WorkflowCreateInput>
+    {
+        /// <summary>
+        /// Initialize an new WorkflowCreate mutation instance.
+        /// </summary>
+        /// <param name="data">The input data.</param>
+        /// <param name="query">The workflow response query.</param>
+        internal WorkflowCreateMutation(WorkflowCreateInput data, WorkflowQuery query)
+            : base("workflowCreate", "WorkflowCreateInput!", data, GetQuery(query))
+        {
+        }
+
+        /// <summary>
+        /// Generates the response query collection.
+        /// </summary>
+        /// <param name="query">The workflow response query.</param>
+        /// <returns>A query collection.</returns>
+        private static HashSet<IQuery> GetQuery(WorkflowQuery query)
+        {
+            query.FieldName = "workflow";
+            query.IsConnection = false;
+            return new HashSet<IQuery>() { query };
+        }
+    }
+}
