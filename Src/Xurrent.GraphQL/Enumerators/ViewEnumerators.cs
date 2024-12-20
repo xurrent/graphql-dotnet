@@ -21,7 +21,7 @@ namespace Xurrent.GraphQL
     public enum AffectedSlaView
     {
         /// <summary>
-        /// All affected slas which account equals the value supplied via the `x-4me-account` header.
+        /// All affected slas which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -38,7 +38,7 @@ namespace Xurrent.GraphQL
     public enum AgileBoardView
     {
         /// <summary>
-        /// All agile boards which account equals the value supplied via the `x-4me-account` header.
+        /// All agile boards which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -55,7 +55,7 @@ namespace Xurrent.GraphQL
     public enum AppInstanceView
     {
         /// <summary>
-        /// All app instances which account equals the value supplied via the `x-4me-account` header.
+        /// All app instances which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -72,7 +72,7 @@ namespace Xurrent.GraphQL
     public enum AppOfferingView
     {
         /// <summary>
-        /// All app offerings which account equals the value supplied via the `x-4me-account` header.
+        /// All app offerings which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -89,7 +89,7 @@ namespace Xurrent.GraphQL
     public enum ArchiveView
     {
         /// <summary>
-        /// All archives which account equals the value supplied via the `x-4me-account` header.
+        /// All archives which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -106,7 +106,7 @@ namespace Xurrent.GraphQL
     public enum AutomationRuleView
     {
         /// <summary>
-        /// All automation rules which account equals the value supplied via the `x-4me-account` header.
+        /// All automation rules which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -133,7 +133,7 @@ namespace Xurrent.GraphQL
     public enum ConfigurationItemView
     {
         /// <summary>
-        /// All configuration items which account equals the value supplied via the `x-4me-account` header.
+        /// All configuration items which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -170,7 +170,7 @@ namespace Xurrent.GraphQL
     public enum ContractView
     {
         /// <summary>
-        /// All contracts which account equals the value supplied via the `x-4me-account` header.
+        /// All contracts which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -187,7 +187,7 @@ namespace Xurrent.GraphQL
     public enum CustomCollectionElementView
     {
         /// <summary>
-        /// All custom collection elements which account equals the value supplied via the `x-4me-account` header.
+        /// All custom collection elements which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -204,7 +204,7 @@ namespace Xurrent.GraphQL
     public enum FirstLineSupportAgreementView
     {
         /// <summary>
-        /// All first line support agreements which account equals the value supplied via the `x-4me-account` header.
+        /// All first line support agreements which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -221,7 +221,7 @@ namespace Xurrent.GraphQL
     public enum InvoiceView
     {
         /// <summary>
-        /// All invoices which account equals the value supplied via the `x-4me-account` header.
+        /// All invoices which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -238,7 +238,7 @@ namespace Xurrent.GraphQL
     public enum KnowledgeArticleTemplateView
     {
         /// <summary>
-        /// All knowledge article templates which account equals the value supplied via the `x-4me-account` header.
+        /// All knowledge article templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -255,7 +255,7 @@ namespace Xurrent.GraphQL
     public enum KnowledgeArticleView
     {
         /// <summary>
-        /// All knowledge articles which account equals the value supplied via the `x-4me-account` header.
+        /// All knowledge articles which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -287,7 +287,7 @@ namespace Xurrent.GraphQL
     public enum OrganizationView
     {
         /// <summary>
-        /// All organizations which account equals the value supplied via the `x-4me-account` header.
+        /// All organizations which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -309,7 +309,7 @@ namespace Xurrent.GraphQL
     public enum OutOfOfficePeriodView
     {
         /// <summary>
-        /// All out of office periods which account equals the value supplied via the `x-4me-account` header.
+        /// All out of office periods which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -331,7 +331,7 @@ namespace Xurrent.GraphQL
     public enum PersonView
     {
         /// <summary>
-        /// All people which account equals the value supplied via the `x-4me-account` header.
+        /// All people which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -363,7 +363,7 @@ namespace Xurrent.GraphQL
     public enum ProblemView
     {
         /// <summary>
-        /// All problems which account equals the value supplied via the `x-4me-account` header.
+        /// All problems which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -405,7 +405,7 @@ namespace Xurrent.GraphQL
     public enum ProductBacklogView
     {
         /// <summary>
-        /// All product backlogs which account equals the value supplied via the `x-4me-account` header.
+        /// All product backlogs which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -417,12 +417,29 @@ namespace Xurrent.GraphQL
     }
 
     /// <summary>
+    /// The product category view.
+    /// </summary>
+    public enum ProductCategoryView
+    {
+        /// <summary>
+        /// All product categories which account equals the value supplied via the `x-xurrent-account` header.
+        /// </summary>
+        [EnumMember(Value = "current_account")]
+        CurrentAccount,
+        /// <summary>
+        /// Product categories.
+        /// </summary>
+        [EnumMember(Value = "all")]
+        All,
+    }
+
+    /// <summary>
     /// The product view.
     /// </summary>
     public enum ProductView
     {
         /// <summary>
-        /// All products which account equals the value supplied via the `x-4me-account` header.
+        /// All products which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -444,7 +461,7 @@ namespace Xurrent.GraphQL
     public enum ProjectTaskTemplateView
     {
         /// <summary>
-        /// All project task templates which account equals the value supplied via the `x-4me-account` header.
+        /// All project task templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -461,7 +478,7 @@ namespace Xurrent.GraphQL
     public enum ProjectTaskView
     {
         /// <summary>
-        /// All project tasks which account equals the value supplied via the `x-4me-account` header.
+        /// All project tasks which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -498,7 +515,7 @@ namespace Xurrent.GraphQL
     public enum ProjectTemplateView
     {
         /// <summary>
-        /// All project templates which account equals the value supplied via the `x-4me-account` header.
+        /// All project templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -515,7 +532,7 @@ namespace Xurrent.GraphQL
     public enum ProjectView
     {
         /// <summary>
-        /// All projects which account equals the value supplied via the `x-4me-account` header.
+        /// All projects which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -557,7 +574,7 @@ namespace Xurrent.GraphQL
     public enum ReleaseView
     {
         /// <summary>
-        /// All releases which account equals the value supplied via the `x-4me-account` header.
+        /// All releases which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -589,7 +606,7 @@ namespace Xurrent.GraphQL
     public enum RequestTemplateView
     {
         /// <summary>
-        /// All request templates which account equals the value supplied via the `x-4me-account` header.
+        /// All request templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -606,7 +623,7 @@ namespace Xurrent.GraphQL
     public enum RequestView
     {
         /// <summary>
-        /// All requests which account equals the value supplied via the `x-4me-account` header.
+        /// All requests which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -678,7 +695,7 @@ namespace Xurrent.GraphQL
     public enum ReservationOfferingView
     {
         /// <summary>
-        /// All reservation offerings which account equals the value supplied via the `x-4me-account` header.
+        /// All reservation offerings which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -695,7 +712,7 @@ namespace Xurrent.GraphQL
     public enum ReservationView
     {
         /// <summary>
-        /// All reservations which account equals the value supplied via the `x-4me-account` header.
+        /// All reservations which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -717,7 +734,7 @@ namespace Xurrent.GraphQL
     public enum RiskView
     {
         /// <summary>
-        /// All risks which account equals the value supplied via the `x-4me-account` header.
+        /// All risks which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -744,7 +761,7 @@ namespace Xurrent.GraphQL
     public enum ScrumWorkspaceView
     {
         /// <summary>
-        /// All scrum workspaces which account equals the value supplied via the `x-4me-account` header.
+        /// All scrum workspaces which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -761,7 +778,7 @@ namespace Xurrent.GraphQL
     public enum ServiceInstanceView
     {
         /// <summary>
-        /// All service instances which account equals the value supplied via the `x-4me-account` header.
+        /// All service instances which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -778,7 +795,7 @@ namespace Xurrent.GraphQL
     public enum ServiceLevelAgreementView
     {
         /// <summary>
-        /// All service level agreements which account equals the value supplied via the `x-4me-account` header.
+        /// All service level agreements which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -795,7 +812,7 @@ namespace Xurrent.GraphQL
     public enum ServiceOfferingView
     {
         /// <summary>
-        /// All service offerings which account equals the value supplied via the `x-4me-account` header.
+        /// All service offerings which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -812,7 +829,7 @@ namespace Xurrent.GraphQL
     public enum ServiceView
     {
         /// <summary>
-        /// All services which account equals the value supplied via the `x-4me-account` header.
+        /// All services which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -829,7 +846,7 @@ namespace Xurrent.GraphQL
     public enum ShopArticleCategoryView
     {
         /// <summary>
-        /// All shop article categories which account equals the value supplied via the `x-4me-account` header.
+        /// All shop article categories which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -846,7 +863,7 @@ namespace Xurrent.GraphQL
     public enum ShopArticleView
     {
         /// <summary>
-        /// All shop articles which account equals the value supplied via the `x-4me-account` header.
+        /// All shop articles which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -863,7 +880,7 @@ namespace Xurrent.GraphQL
     public enum ShopOrderLineView
     {
         /// <summary>
-        /// All shop order lines which account equals the value supplied via the `x-4me-account` header.
+        /// All shop order lines which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -895,7 +912,7 @@ namespace Xurrent.GraphQL
     public enum ShortUrlView
     {
         /// <summary>
-        /// All short urls which account equals the value supplied via the `x-4me-account` header.
+        /// All short urls which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -912,7 +929,7 @@ namespace Xurrent.GraphQL
     public enum SiteView
     {
         /// <summary>
-        /// All sites which account equals the value supplied via the `x-4me-account` header.
+        /// All sites which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -929,7 +946,7 @@ namespace Xurrent.GraphQL
     public enum SkillPoolView
     {
         /// <summary>
-        /// All skill pools which account equals the value supplied via the `x-4me-account` header.
+        /// All skill pools which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -946,7 +963,7 @@ namespace Xurrent.GraphQL
     public enum SprintView
     {
         /// <summary>
-        /// All sprints which account equals the value supplied via the `x-4me-account` header.
+        /// All sprints which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -963,7 +980,7 @@ namespace Xurrent.GraphQL
     public enum SurveyResponseView
     {
         /// <summary>
-        /// All survey responses which account equals the value supplied via the `x-4me-account` header.
+        /// All survey responses which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -980,7 +997,7 @@ namespace Xurrent.GraphQL
     public enum SurveyView
     {
         /// <summary>
-        /// All surveys which account equals the value supplied via the `x-4me-account` header.
+        /// All surveys which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -997,7 +1014,7 @@ namespace Xurrent.GraphQL
     public enum TaskTemplateView
     {
         /// <summary>
-        /// All task templates which account equals the value supplied via the `x-4me-account` header.
+        /// All task templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1014,7 +1031,7 @@ namespace Xurrent.GraphQL
     public enum TaskView
     {
         /// <summary>
-        /// All tasks which account equals the value supplied via the `x-4me-account` header.
+        /// All tasks which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1056,7 +1073,7 @@ namespace Xurrent.GraphQL
     public enum TeamView
     {
         /// <summary>
-        /// All teams which account equals the value supplied via the `x-4me-account` header.
+        /// All teams which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1083,7 +1100,7 @@ namespace Xurrent.GraphQL
     public enum TimeAllocationView
     {
         /// <summary>
-        /// All time allocations which account equals the value supplied via the `x-4me-account` header.
+        /// All time allocations which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1100,7 +1117,7 @@ namespace Xurrent.GraphQL
     public enum TimeEntryView
     {
         /// <summary>
-        /// All time entries which account equals the value supplied via the `x-4me-account` header.
+        /// All time entries which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1129,7 +1146,7 @@ namespace Xurrent.GraphQL
     public enum TrashView
     {
         /// <summary>
-        /// All trashes which account equals the value supplied via the `x-4me-account` header.
+        /// All trashes which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1146,7 +1163,7 @@ namespace Xurrent.GraphQL
     public enum UiExtensionView
     {
         /// <summary>
-        /// All ui extensions which account equals the value supplied via the `x-4me-account` header.
+        /// All ui extensions which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1163,7 +1180,7 @@ namespace Xurrent.GraphQL
     public enum WorkflowTemplateView
     {
         /// <summary>
-        /// All workflow templates which account equals the value supplied via the `x-4me-account` header.
+        /// All workflow templates which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,
@@ -1180,7 +1197,7 @@ namespace Xurrent.GraphQL
     public enum WorkflowView
     {
         /// <summary>
-        /// All workflows which account equals the value supplied via the `x-4me-account` header.
+        /// All workflows which account equals the value supplied via the `x-xurrent-account` header.
         /// </summary>
         [EnumMember(Value = "current_account")]
         CurrentAccount,

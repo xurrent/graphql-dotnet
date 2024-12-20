@@ -13,7 +13,7 @@ namespace Xurrent.GraphQL.Tests
         public void Get()
         {
             DataList<ProductCategory> productCategories = client.Get(Query.ProductCategory
-                .View(DefaultView.None)
+                .View(ProductCategoryView.CurrentAccount)
                 .SelectAll()
                 .SelectProducts(new ProductQuery()
                     .SelectAll())

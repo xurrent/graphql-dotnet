@@ -336,11 +336,11 @@ namespace Xurrent.GraphQL.Helpers
             PropertyInfo[] allProperties = dataType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Where(x => !x.PropertyType.IsInterface).ToArray();
             foreach (PropertyInfo propertyInfo in allProperties)
             {
-                if (propertyInfo.GetCustomAttribute(typeof(JsonPropertyAttribute)) is JsonPropertyAttribute jsonProperty && jsonProperty.PropertyName is string jsonPropertyName)
+                if (propertyInfo.GetCustomAttribute<JsonPropertyAttribute>() is JsonPropertyAttribute jsonProperty && jsonProperty.PropertyName is string jsonPropertyName)
                 {
                     retval.Add(new(jsonPropertyName, propertyInfo)
                     {
-                        IsDefault = (propertyInfo.GetCustomAttribute(typeof(XurrentFieldAttribute)) is XurrentFieldAttribute xurrentDefaultField) && xurrentDefaultField.IsDefaultQueryProperty,
+                        IsDefault = (propertyInfo.GetCustomAttribute<XurrentFieldAttribute>() is XurrentFieldAttribute xurrentDefaultField) && xurrentDefaultField.IsDefaultQueryProperty,
                         IsSelected = selectedFields != null && selectedFields.Contains(jsonPropertyName)
                     });
                 }
@@ -370,7 +370,7 @@ namespace Xurrent.GraphQL.Helpers
 
             if (retval.FirstOrDefault(x => x.Name == "id") is ExecutionQueryField queryField)
             {
-                if (dataType.GetCustomAttribute(typeof(XurrentEntityAttribute)) is XurrentEntityAttribute attribute && attribute.IgnoreIdentifier)
+                if (dataType.GetCustomAttribute<XurrentEntityAttribute>() is XurrentEntityAttribute attribute && attribute.IgnoreIdentifier)
                     queryField.IsSelected = false;
                 else
                     queryField.IsSelected = true;
