@@ -172,7 +172,7 @@ A view can only be used on the top level query.
 
 #### Nested Queries and Items per Request
 ```csharp
-IQuery query = Query.Person
+PersonQuery query = Query.Person
     .Select(PersonField.ID, PersonField.Name)
     .ItemsPerRequest(10)
     .SelectTeams(Query.Team)
