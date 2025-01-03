@@ -18,7 +18,6 @@ namespace Xurrent.GraphQL
         private int costLimit = int.MaxValue;
         private int costLimitRemaining = int.MaxValue;
         private DateTime costLimitReset = DateTime.MinValue;
-        private DateTime updatedAt = DateTime.MinValue;
         private DateTime authenticationTokenExpires = DateTime.MinValue;
 
         /// <summary>
@@ -61,15 +60,6 @@ namespace Xurrent.GraphQL
         internal string ClientSecret
         {
             get => clientSecret;
-        }
-
-        /// <summary>
-        /// Get or set the Xurrent OAuth 2.0 client grant token expiration time.
-        /// </summary>
-        internal DateTime AuthenticationTokenExpires
-        {
-            get => authenticationTokenExpires;
-            set => authenticationTokenExpires = value;
         }
 
         /// <summary>
@@ -129,24 +119,6 @@ namespace Xurrent.GraphQL
         }
 
         /// <summary>
-        /// Return the date and time when the request limit and remaining request values were updated.
-        /// </summary>
-        public DateTime UpdatedAt
-        {
-            get => updatedAt;
-            internal set => updatedAt = value;
-        }
-
-        /// <summary>
-        /// Check if the current token is expired.
-        /// </summary>
-        /// <returns>True if the current token is expired or will expire in less than a minute; otherwise false.</returns>
-        internal bool IsTokenExpired()
-        {
-            return authenticationTokenExpires < DateTime.Now.AddMinutes(+1);
-        }
-
-        /// <summary>
         /// Create a new instance of an <see cref="AuthenticationToken"/> with <b>Personal Access Token</b> authentication.
         /// </summary>
         /// <param name="authenticationToken">The Xurrent authentication token.</param>
@@ -170,6 +142,24 @@ namespace Xurrent.GraphQL
             authenticationTokenExpires = DateTime.MinValue;
             tokenType = string.Empty;
             identifier = (clientID + clientSecret).GetHashCode();
+        }
+
+        /// <summary>
+        /// Updates the expiration date and time for the authentication token based on the specified duration in seconds.
+        /// </summary>
+        /// <param name="expiresInSeconds">The number of seconds from the current time after which the token will expire.</param>
+        internal void UpdateTokenExpiration(int expiresInSeconds)
+        {
+            authenticationTokenExpires = DateTime.UtcNow.AddSeconds(expiresInSeconds);
+        }
+
+        /// <summary>
+        /// Check if the current token is expired.
+        /// </summary>
+        /// <returns>True if the current token is expired or will expire in less than a minute; otherwise false.</returns>
+        internal bool IsTokenExpired()
+        {
+            return authenticationTokenExpires < DateTime.UtcNow.AddMinutes(+1);
         }
     }
 }

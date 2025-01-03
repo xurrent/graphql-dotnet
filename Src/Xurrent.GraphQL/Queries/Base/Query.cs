@@ -304,8 +304,7 @@ namespace Xurrent.GraphQL
                 {
                     foreach (KeyValuePair<string, IQuery> onType in query.OnTypesQueries)
                     {
-                        if (!existingQuery.OnTypesQueries.TryAdd(onType.Key, onType.Value))
-                            existingQuery.OnTypesQueries[onType.Key] = onType.Value;
+                        existingQuery.OnTypesQueries[onType.Key] = onType.Value;
                     }
                 }
                 else

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,30 +14,17 @@ namespace Xurrent.GraphQL.Helpers
     /// </summary>
     public class JsonEnumConverter : JsonConverter
     {
-        [ThreadStatic]
-        private static Dictionary<Type, Dictionary<string, object>>? fromList;
+        private static readonly ConcurrentDictionary<Type, Dictionary<string, object>> fromList = new();
+        private static readonly ConcurrentDictionary<Type, Dictionary<object, string>> toList = new();
 
-        [ThreadStatic]
-        private static Dictionary<Type, Dictionary<object, string>>? toList;
 
-        /// <summary>
-        /// Determines whether this instance can convert the specified object type.
-        /// </summary>
-        /// <param name="objectType">Type of the object.</param>
-        /// <returns>True if this instance can convert the specified object type; otherwise, false.</returns>
+        /// <inheritdoc />
         public override bool CanConvert(Type objectType)
         {
             return (objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(objectType) ?? throw new ArgumentNullException(nameof(objectType)) : objectType).IsEnum;
         }
 
-        /// <summary>
-        /// Reads the JSON representation of the object.
-        /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> to read from.</param>
-        /// <param name="objectType">Type of the object.</param>
-        /// <param name="existingValue">The existing value of object being read.</param>
-        /// <param name="serializer">The calling serializer.</param>
-        /// <returns>The object value.</returns>
+        /// <inheritdoc />
         public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
@@ -63,7 +51,7 @@ namespace Xurrent.GraphQL.Helpers
                     return Enum.Parse(enumType, enumValue.ToString(CultureInfo.InvariantCulture));
             }
 
-            return !isNullable ? 0 : null;
+            return !isNullable ? Activator.CreateInstance(enumType) : null;
         }
 
         /// <summary>
@@ -84,9 +72,6 @@ namespace Xurrent.GraphQL.Helpers
 
         private static void AddMapping(Type enumType)
         {
-            fromList ??= new();
-            toList ??= new();
-
             if (fromList.ContainsKey(enumType))
                 return;
 

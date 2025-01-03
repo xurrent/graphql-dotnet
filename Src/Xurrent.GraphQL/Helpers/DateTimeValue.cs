@@ -7,9 +7,20 @@ namespace Xurrent.GraphQL.Helpers
     /// </summary>
     public static class DateTimeValue
     {
-        private static readonly DateTime bestEffort = new(1, 1, 1, 1, 1, 1, 111);
-        private static readonly DateTime noTarget = new(2, 2, 2, 2, 2, 2, 222);
-        private static readonly DateTime clockStopped = new(3, 3, 3, 3, 3, 3, 333);
+        /// <summary>
+        /// The Xurrent SDK predefined 'best effort' date time value.
+        /// </summary>
+        public static readonly DateTime BestEffortDateTime = new(1, 1, 1, 1, 1, 1, 111);
+
+        /// <summary>
+        /// The Xurrent SDK predefined 'no target' date time value.
+        /// </summary>
+        public static readonly DateTime NoTargetDateTime = new(2, 2, 2, 2, 2, 2, 222);
+
+        /// <summary>
+        /// The Xurrent SDK predefined 'clock stopped' date time value.
+        /// </summary>
+        public static readonly DateTime ClockStoppedDateTime = new(3, 3, 3, 3, 3, 3, 333);
 
         /// <summary>
         /// The Xurrent 'best effort' string value.
@@ -25,20 +36,5 @@ namespace Xurrent.GraphQL.Helpers
         /// The Xurrent 'clocked stopped' string value.
         /// </summary>
         public const string ClockStoppedText = "clock_stopped";
-
-        /// <summary>
-        /// The Xurrent SDK predefined 'best effort' date time value.
-        /// </summary>
-        public static DateTime BestEffortDateTime => bestEffort;
-
-        /// <summary>
-        /// The Xurrent SDK predefined 'no target' date time value.
-        /// </summary>
-        public static DateTime NoTargetDateTime => noTarget;
-
-        /// <summary>
-        /// The Xurrent SDK predefined 'clock stopped' date time value.
-        /// </summary>
-        public static DateTime ClockStoppedDateTime => clockStopped;
     }
 }

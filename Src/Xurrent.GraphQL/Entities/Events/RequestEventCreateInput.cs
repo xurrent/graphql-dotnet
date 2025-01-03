@@ -633,8 +633,7 @@ namespace Xurrent.GraphQL
         /// <param name="value">The property value.</param>
         private void AddToRequest(string name, object value)
         {
-            if (!eventRequestProperties.TryAdd(name, value))
-                eventRequestProperties[name] = value;
+            eventRequestProperties[name] = value;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Xurrent.GraphQL
     /// </summary>
     public class TraceMessage
     {
+        private static readonly JsonSerializerSettings jsonSerializerSettings = new() { Formatting = Formatting.None, NullValueHandling = NullValueHandling.Ignore };
+
         /// <summary>
         /// Gets or sets the HTTP method.
         /// </summary>
@@ -50,7 +52,7 @@ namespace Xurrent.GraphQL
         /// <returns></returns>
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this, Formatting.None, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            return JsonConvert.SerializeObject(this, jsonSerializerSettings);
         }
     }
 }

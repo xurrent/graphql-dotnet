@@ -25,7 +25,7 @@ namespace Xurrent.GraphQL
         private const string accountHeader = "x-xurrent-account";
 
         private readonly AuthenticationTokenCollection authenticationTokens;
-        private readonly Sleep sleepEnforcer;
+        private readonly RateLimiter rateLimiter;
         private readonly DateTime unixEpoch;
         private readonly JsonSerializer jsonSerializer;
         private readonly InterfaceConverter interfaceConverter;
@@ -47,6 +47,7 @@ namespace Xurrent.GraphQL
         /// <br>Get or set the number of recursive requests.</br>
         /// <br>The value must be at least 1 and maximum 1000.</br>
         /// </summary>
+        /// <value>The default value is 10.</value>
         public int MaximumRecursiveRequests
         {
             get => maximumRecursiveRequests;
@@ -56,8 +57,9 @@ namespace Xurrent.GraphQL
         /// <summary>
         /// <br>Get or set the maximum number of GraphQL depth level connections.</br>
         /// <br>The value must be at least 1 and maximum 13.</br>
-        /// <para>Warning: changing this to a higher value can impact performance significantly because of the built-in pagination handling. The default value is 2.</para>
+        /// <para>Warning: changing this to a higher value can impact performance significantly because of the built-in pagination handling.</para>
         /// </summary>
+        /// <value>The default value is 2.</value>
         public int MaximumQueryDepthLevelConnections
         {
             get => maximumQueryDepthLevelConnections;
@@ -68,6 +70,7 @@ namespace Xurrent.GraphQL
         /// <br>Get or set the number of objects returned per API call.</br>
         /// <br>The value needs to be between 1 and 100 inclusive.</br>
         /// </summary>
+        /// <value>The default value is 100.</value>
         public int DefaultItemsPerRequest
         {
             get => itemsPerRequest;
@@ -98,6 +101,7 @@ namespace Xurrent.GraphQL
         /// <br>True to ignore unmappable enumerator values; otherwise false.</br>
         /// <br>If the SDK cannot recognize a specific enumerator value, it will either return null or a default value instead.</br>
         /// </summary>
+        /// <value>The default value is <see langword="true"/>.</value>
         public bool EnumeratorTolerantSerializer
         {
             get => jsonSerializer.Converters.Any(x => x.GetType() == typeof(JsonEnumConverter));
@@ -182,10 +186,13 @@ namespace Xurrent.GraphQL
             if (string.IsNullOrWhiteSpace(accountID))
                 throw new ArgumentException($"'{nameof(accountID)}' cannot be null or empty.", nameof(accountID));
 
+            if (string.IsNullOrWhiteSpace(apiBaseUrl))
+                throw new ArgumentException($"'{nameof(apiBaseUrl)}' cannot be null or empty.", nameof(apiBaseUrl));
+
             if (authenticationTokens is null || !authenticationTokens.Any())
                 throw new ArgumentException($"'{nameof(authenticationTokens)}' cannot be null or empty.", nameof(authenticationTokens));
 
-            sleepEnforcer = new();
+            rateLimiter = RateLimiter.Instance;
             unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             url = EndpointUrlBuilder.Get(apiBaseUrl);
             restUrl = EndpointUrlBuilder.GetRest(apiBaseUrl);
@@ -400,13 +407,15 @@ namespace Xurrent.GraphQL
                     {
                         Guid logId = Guid.NewGuid();
                         WriteDebug(logId, requestMessage, "***");
-                        sleepEnforcer.RegisterStartTime();
+                        
+                        await rateLimiter.WaitForToken(currentToken, CancellationToken.None);
+                        Stopwatch stopwatch = Stopwatch.StartNew();
 
                         using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage))
                         {
-                            WriteDebug(logId, requestMessage, "***", true);
-                            await sleepEnforcer.SleepRemainingTime(0);
-
+                            WriteDebug(logId, requestMessage, "***", stopwatch.Elapsed);
+                            stopwatch.Stop();
+                            
                             using (StreamReader reader = new(await responseMessage.Content.ReadAsStreamAsync()))
                             {
                                 string data = await reader.ReadToEndAsync();
@@ -519,12 +528,14 @@ namespace Xurrent.GraphQL
                         from
                     }
                 }));
-                sleepEnforcer.RegisterStartTime();
+
+                await rateLimiter.WaitForToken(currentToken, CancellationToken.None);
+                Stopwatch stopwatch = Stopwatch.StartNew();
 
                 using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage))
                 {
-                    WriteDebug(logId, requestMessage, null, true);
-                    await sleepEnforcer.SleepRemainingTime();
+                    stopwatch.Stop();
+                    WriteDebug(logId, requestMessage, null, stopwatch.Elapsed);
 
                     if (responseMessage.IsSuccessStatusCode && responseMessage.Content.Headers.ContentType?.MediaType == applicationJsonMediaType)
                     {
@@ -579,12 +590,14 @@ namespace Xurrent.GraphQL
                         filename
                     }
                 }));
-                sleepEnforcer.RegisterStartTime();
+                
+                await rateLimiter.WaitForToken(currentToken, CancellationToken.None);
+                Stopwatch stopwatch = Stopwatch.StartNew();
 
                 using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage))
                 {
-                    WriteDebug(logId, requestMessage, null, true);
-                    await sleepEnforcer.SleepRemainingTime();
+                    stopwatch.Stop();
+                    WriteDebug(logId, requestMessage, null, stopwatch.Elapsed);
 
                     if (responseMessage.IsSuccessStatusCode && responseMessage.Content.Headers.ContentType?.MediaType == applicationJsonMediaType)
                     {
@@ -628,12 +641,14 @@ namespace Xurrent.GraphQL
 
                 Guid logId = Guid.NewGuid();
                 WriteDebug(logId, requestMessage, null);
-                sleepEnforcer.RegisterStartTime();
+
+                await rateLimiter.WaitForToken(currentToken, cancellationToken);
+                Stopwatch stopwatch = Stopwatch.StartNew();
 
                 using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage, cancellationToken))
                 {
-                    WriteDebug(logId, requestMessage, null, true);
-                    await sleepEnforcer.SleepRemainingTime();
+                    stopwatch.Stop();
+                    WriteDebug(logId, requestMessage, null, stopwatch.Elapsed);
 
                     if (responseMessage.IsSuccessStatusCode && responseMessage.Content.Headers.ContentType?.MediaType == applicationJsonMediaType)
                     {
@@ -684,19 +699,21 @@ namespace Xurrent.GraphQL
 
                     Guid logId = Guid.NewGuid();
                     WriteDebug(logId, requestMessage, "***");
-                    sleepEnforcer.RegisterStartTime();
+
+                    await rateLimiter.WaitForToken(currentToken, CancellationToken.None);
+                    Stopwatch stopwatch = Stopwatch.StartNew();
 
                     using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage))
                     {
-                        WriteDebug(logId, requestMessage, "***", true);
-                        await sleepEnforcer.SleepRemainingTime(0);
+                        stopwatch.Stop();
+                        WriteDebug(logId, requestMessage, null, stopwatch.Elapsed);
 
                         responseMessage.EnsureSuccessStatusCode();
                         string content = await responseMessage.Content.ReadAsStringAsync();
                         AuthenticationOAuth2Reponse response = JsonConvert.DeserializeObject<AuthenticationOAuth2Reponse>(content) ?? throw new XurrentException("Invalid authentication response.");
                         currentToken.Token = response.AccessToken;
                         currentToken.TokenType = response.TokenType;
-                        currentToken.AuthenticationTokenExpires = DateTime.Now.AddSeconds(response.ExpiresIn);
+                        currentToken.UpdateTokenExpiration(response.ExpiresIn);
                     }
                 }
             }
@@ -717,11 +734,14 @@ namespace Xurrent.GraphQL
 
             Guid logId = Guid.NewGuid();
             WriteDebug(logId, requestMessage, content);
-            sleepEnforcer.RegisterStartTime();
+
+            await rateLimiter.WaitForToken(currentToken, CancellationToken.None);
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             using (HttpResponseMessage responseMessage = await client.SendAsync(requestMessage))
             {
-                WriteDebug(logId, requestMessage, content, true);
-                await sleepEnforcer.SleepRemainingTime();
+                stopwatch.Stop();
+                WriteDebug(logId, requestMessage, null, stopwatch.Elapsed);
 
                 if (responseMessage.IsSuccessStatusCode && responseMessage.Content.Headers.ContentType?.MediaType == applicationJsonMediaType)
                 {
@@ -791,13 +811,14 @@ namespace Xurrent.GraphQL
         /// <param name="logIdentifier">The unique log group identifier.</param>
         /// <param name="requestMessage">The HTTP request message.</param>
         /// <param name="content">The HTTP request message content.</param>
-        /// <param name="isResponse">Is the HTTP request been executed.</param>
-        private void WriteDebug(Guid logIdentifier, HttpRequestMessage requestMessage, string? content = null, bool isResponse = false)
+        /// <param name="responseTime">The HTTP request response time.</param>
+        private void WriteDebug(Guid logIdentifier, HttpRequestMessage requestMessage, string? content = null, TimeSpan? responseTime = null)
         {
             try
             {
                 if (traceEnabled)
                 {
+                    bool isResponse = responseTime != null;
                     Trace.WriteLine(new TraceMessage()
                     {
                         ID = logIdentifier,
@@ -805,7 +826,7 @@ namespace Xurrent.GraphQL
                         Method = isResponse ? null : requestMessage.Method.ToString(),
                         URI = isResponse ? null : requestMessage.RequestUri?.AbsoluteUri,
                         Content = isResponse ? null : content,
-                        ResponseTimeInMilliseconds = isResponse ? sleepEnforcer.ResponseTimeInMilliseconds : null
+                        ResponseTimeInMilliseconds = isResponse ? responseTime!.Value.Milliseconds : null
                     });
                     Trace.Flush();
                 }
