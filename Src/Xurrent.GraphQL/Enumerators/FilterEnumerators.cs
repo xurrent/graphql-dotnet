@@ -2561,6 +2561,11 @@ namespace Xurrent.GraphQL
         [EnumMember(Value = "nextTargetAt")]
         NextTargetAt,
         /// <summary>
+        /// Customer target at in supplied range.
+        /// </summary>
+        [EnumMember(Value = "customerTargetAt")]
+        CustomerTargetAt,
+        /// <summary>
         /// Filter on major incident status.
         /// </summary>
         [EnumMember(Value = "majorIncidentStatus")]

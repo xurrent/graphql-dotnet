@@ -15,6 +15,12 @@ namespace Xurrent.GraphQL
         public bool? Directory { get; internal set; }
 
         /// <summary>
+        /// The directory account of the current support domain.
+        /// </summary>
+        [JsonProperty("directoryAccount")]
+        public Account? DirectoryAccount { get; internal set; }
+
+        /// <summary>
         /// Indicates whether the account is disabled.
         /// </summary>
         [JsonProperty("disabled"), XurrentField(IsDefaultQueryProperty = true)]
