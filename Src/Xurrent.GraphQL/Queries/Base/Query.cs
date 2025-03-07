@@ -281,8 +281,11 @@ namespace Xurrent.GraphQL
 
         /// <summary>
         /// Add all non-connection fields to the current query.
-        /// <para>Warning: this will impact performance. Try to select the required fields.</para>
         /// </summary>
+        /// <remarks>
+        /// <b>Warning:</b> This method will significantly impact performance.<br />
+        /// It is intended for debugging or testing purposes. Using this method in production may fail if certain fields do not yet exist in the production schema.<br />
+        /// </remarks>
         /// <returns>The current <see cref="IQuery"/>.</returns>
         /// <exception cref="ArgumentException"></exception>
         public TEntity SelectAll()
