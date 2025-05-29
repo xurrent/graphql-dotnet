@@ -16,12 +16,6 @@ namespace Xurrent.GraphQL
         public ServiceOfferingChargeType? ChargeType { get; internal set; }
 
         /// <summary>
-        /// The date and time at which the standard service request was created.
-        /// </summary>
-        [JsonProperty("createdAt"), XurrentField(IsDefaultQueryProperty = true)]
-        public DateTime? CreatedAt { get; internal set; }
-
-        /// <summary>
         /// Defines the fixed price rate for the standard service request.
         /// </summary>
         [JsonProperty("rate")]
@@ -99,12 +93,6 @@ namespace Xurrent.GraphQL
         /// </summary>
         [JsonProperty("supportHours")]
         public Calendar? SupportHours { get; internal set; }
-
-        /// <summary>
-        /// The date and time of the last update of the standard service request. If the standard service request has no updates it contains the <c>createdAt</c> value.
-        /// </summary>
-        [JsonProperty("updatedAt"), XurrentField(IsDefaultQueryProperty = true)]
-        public DateTime? UpdatedAt { get; internal set; }
 
         internal override HashSet<QueryPageInfo> GetQueryPageInfo(string fieldName, int depth)
         {
